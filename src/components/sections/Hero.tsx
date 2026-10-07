@@ -16,10 +16,11 @@ import {
   heroEntranceContainerVariants,
   heroEntranceItemVariants,
 } from "@/lib/motion";
+import { Portrait } from "@/components/ui/Portrait";
 
 /**
  * Hero section with layered decorative parallax, chromatic character reveal,
- * looped typewriter role line, and smooth scroll CTA buttons.
+ * looped typewriter role line, responsive morphing blob Portrait, and smooth scroll CTA buttons.
  */
 export function Hero() {
   const { version } = useVersion();
@@ -123,47 +124,58 @@ export function Hero() {
         variants={heroEntranceContainerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto w-full max-w-[1200px] py-16"
+        className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col-reverse items-start justify-between gap-6 py-8 sm:gap-8 sm:py-12 min-[861px]:flex-row min-[861px]:items-center min-[861px]:gap-12 min-[861px]:py-16"
       >
-        {/* Greeting line */}
-        <motion.p
-          variants={heroEntranceItemVariants}
-          className="text-muted mb-3 text-[1.15rem] font-medium select-none md:text-[1.35rem]"
-        >
-          {version.hello}
-        </motion.p>
+        {/* Text column (Desktop left / Mobile below portrait) */}
+        <div className="relative z-10 flex-1 min-w-0">
+          {/* Greeting line */}
+          <motion.p
+            variants={heroEntranceItemVariants}
+            className="text-muted mb-3 text-[1.15rem] font-medium select-none md:text-[1.35rem]"
+          >
+            {version.hello}
+          </motion.p>
 
-        {/* H1 Name with SplitText characters reveal */}
-        <div>
-          <SplitText
-            text={version.name}
-            mode="chars"
-            as="h1"
-            hero
-            className="text-hero text-[clamp(3rem,10.5vw,7rem)] text-fg leading-[0.95] font-bold tracking-[-0.045em]"
-          />
+          {/* H1 Name with SplitText characters reveal */}
+          <div>
+            <SplitText
+              text={version.name}
+              mode="chars"
+              as="h1"
+              hero
+              className="text-hero text-[clamp(3rem,10.5vw,9rem)] text-fg leading-[0.95] font-bold tracking-[-0.045em]"
+            />
+          </div>
+
+          {/* Role line with dynamic typewriter and blinking caret */}
+          <motion.div
+            variants={heroEntranceItemVariants}
+            className="text-muted text-role mt-7 flex min-h-[1.6em] flex-wrap items-center gap-1.5 leading-snug"
+          >
+            <span className="text-muted font-normal">{version.pre}</span>
+            <Typewriter phrases={version.typed} />
+          </motion.div>
+
+          {/* Action buttons */}
+          <motion.div
+            variants={heroEntranceItemVariants}
+            className="mt-10 flex flex-wrap items-center gap-[0.9rem]"
+          >
+            <Button variant="primary" href="#projects">
+              View work
+            </Button>
+            <Button variant="outline" href="#contact">
+              Get in touch
+            </Button>
+          </motion.div>
         </div>
 
-        {/* Role line with dynamic typewriter and blinking caret */}
+        {/* Portrait column (Desktop right beside Your Name / Mobile above Your Name) */}
         <motion.div
           variants={heroEntranceItemVariants}
-          className="text-muted text-role mt-7 flex min-h-[1.6em] flex-wrap items-center gap-1.5 leading-snug"
+          className="shrink-0 self-start min-[861px]:self-center"
         >
-          <span className="text-muted font-normal">{version.pre}</span>
-          <Typewriter phrases={version.typed} />
-        </motion.div>
-
-        {/* Action buttons */}
-        <motion.div
-          variants={heroEntranceItemVariants}
-          className="mt-10 flex flex-wrap items-center gap-[0.9rem]"
-        >
-          <Button variant="primary" href="#projects">
-            View work
-          </Button>
-          <Button variant="outline" href="#contact">
-            Get in touch
-          </Button>
+          <Portrait />
         </motion.div>
       </motion.div>
     </header>

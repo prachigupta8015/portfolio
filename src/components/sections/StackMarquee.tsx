@@ -38,7 +38,7 @@ export function StackMarquee({ className }: StackMarqueeProps) {
       aria-label="Technologies"
       className={cn("overflow-hidden", className)}
     >
-      <SectionHeading>Stack</SectionHeading>
+      <SectionHeading>Skills</SectionHeading>
 
       <div
         className={cn(

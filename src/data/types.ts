@@ -79,6 +79,7 @@ export interface PortfolioVersion {
   resumeUrl?: string;
   archiveUrl?: string;
   socials?: SocialLinks;
+  photo?: string;
 }
 
 export interface VersionContextType {
