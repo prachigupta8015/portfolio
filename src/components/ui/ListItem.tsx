@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { TagList } from "./TagList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 export interface ListItemProps {
   title: string;
@@ -131,22 +133,7 @@ export function ListItem({
                 </span>
               )}
               {href && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="shrink-0 transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
-                  aria-hidden="true"
-                >
-                  <path d="M7 17 17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
+                <FontAwesomeIcon icon={faLink} className="w-2 h-2" />
               )}
             </h4>
           </div>
