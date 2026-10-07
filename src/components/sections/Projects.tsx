@@ -47,7 +47,7 @@ export function Projects() {
       </div>
 
       {/* Archive link under the list */}
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <a
           href={archiveUrl}
           target="_blank"
@@ -57,7 +57,7 @@ export function Projects() {
           <span>View full project archive</span>
           <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4" />
         </a>
-      </div>
+      </div> */}
     </Section>
   );
 }

@@ -175,7 +175,7 @@ export function Hero() {
           variants={heroEntranceItemVariants}
           className="shrink-0 self-start min-[861px]:self-center"
         >
-          <Portrait />
+          <Portrait name={version.name} photo={version.photo} />
         </motion.div>
       </motion.div>
     </header>
