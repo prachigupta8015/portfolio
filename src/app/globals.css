@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0c0d14;
+  --fg: #ecebf3;
+  --muted: #8d8fa3;
+  --accent: #9aa8ff;
+  --line: rgba(255, 255, 255, 0.1);
+  --card: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] {
+  --bg: #f3f3f8;
+  --fg: #14152a;
+  --muted: #62647a;
+  --accent: #3a49d1;
+  --line: rgba(0, 0, 0, 0.12);
+  --card: rgba(0, 0, 0, 0.035);
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --color-card: var(--card);
+
+  --font-sans:
+    var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-hero: clamp(3rem, 10.5vw, 9rem);
+  --text-hero--line-height: 0.95;
+  --text-hero--letter-spacing: -0.045em;
+  --text-hero--font-weight: 700;
+
+  --text-h3: clamp(2rem, 4.5vw, 3.2rem);
+  --text-h3--line-height: 1.05;
+  --text-h3--letter-spacing: -0.035em;
+  --text-h3--font-weight: 650;
+
+  --text-role: clamp(1.15rem, 2.6vw, 1.9rem);
+
+  --text-cta: clamp(1.6rem, 4.5vw, 3rem);
+  --text-cta--letter-spacing: -0.03em;
+}
+
+@utility text-hero {
+  font-size: clamp(3rem, 10.5vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+}
+
+@utility text-h3 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+}
+
+@utility text-role {
+  font-size: clamp(1.15rem, 2.6vw, 1.9rem);
+}
+
+@utility text-cta {
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  letter-spacing: -0.03em;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family:
+      var(--font-sans),
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      sans-serif;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+}
+
+/* Lenis smooth scroll requirements */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Blinking caret for Typewriter component */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.typewriter-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--accent);
+  animation: blink 1s steps(1) infinite;
+  vertical-align: -0.12em;
+  margin-left: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-caret {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* SplitText mask span to prevent descender clipping */
+.split-mask-span {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.12em 0.02em 0.18em;
+  margin: -0.12em 0 -0.18em;
+  perspective: 600px;
+  vertical-align: top;
+}
+
+/* Sidebar navigation indicator */
+.nav-link-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+  transition: color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-link-indicator::before {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  width: 2rem;
+  background-color: var(--muted);
+  transition:
+    width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-link-indicator:hover,
+.nav-link-indicator[data-active="true"] {
+  color: var(--fg);
+}
+
+.nav-link-indicator:hover::before,
+.nav-link-indicator[data-active="true"]::before {
+  width: 4rem;
+  background-color: var(--fg);
+}
+
+/* Row hover dimming utility */
+.list-hover-group:hover .list-item {
+  opacity: 0.45;
+}
+
+.list-hover-group .list-item:hover {
+  opacity: 1;
+  background-color: var(--card);
+}
+
+.list-hover-group .list-item:hover .item-title {
+  color: var(--accent);
+}
+
+.list-item {
+  transition:
+    opacity 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.item-title {
+  transition: color 0.35s ease;
+}
