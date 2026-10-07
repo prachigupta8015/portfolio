@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { Preloader } from "@/components/ui/Preloader";
 
 /**
  * Portfolio entry page.
@@ -27,6 +28,9 @@ import { ScrollToTop } from "@/components/ui/ScrollToTop";
 export default function Home() {
   return (
     <>
+      {/* High-end introductory preloader */}
+      <Preloader />
+
       {/* Fixed top-right theme toggle with sun & moon icons */}
       <ThemeToggle />
 

@@ -10,6 +10,7 @@ export interface PortraitProps {
   photo?: string;
   name?: string;
   className?: string;
+  id?: string;
 }
 
 const BLOB_KEYFRAMES = [
@@ -30,6 +31,7 @@ export function Portrait({
   photo: photoProp,
   name: nameProp,
   className,
+  id = "hero-portrait",
 }: PortraitProps) {
   const { version } = useVersion();
   const photo = photoProp ?? version.photo;
@@ -82,6 +84,7 @@ export function Portrait({
 
   return (
     <div
+      id={id}
       tabIndex={0}
       role="img"
       aria-label={`Portrait of ${name}`}
