@@ -162,7 +162,7 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
   */
   frontend: {
     label: "Frontend",
-    name: "Prachi Gupta",
+    name: "Prachi",
     role: "Software Engineer",
     hello: "Hi, I'm",
     pre: "I build ",

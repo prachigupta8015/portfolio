@@ -9,6 +9,7 @@ import { Education } from "@/components/sections/Education";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 /**
  * Portfolio entry page.
@@ -28,6 +29,9 @@ export default function Home() {
     <>
       {/* Fixed top-right theme toggle with sun & moon icons */}
       <ThemeToggle />
+
+      {/* Fixed bottom-right scroll-to-top floating button */}
+      <ScrollToTop />
 
       <Hero />
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 px-[clamp(1.25rem,5vw,4rem)] min-[861px]:grid-cols-[minmax(250px,36%)_1fr] min-[861px]:gap-16">
