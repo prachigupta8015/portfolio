@@ -42,8 +42,8 @@ export const VIEWPORTS = {
   } as const,
   reveal: {
     once: false,
-    margin: "0px 0px -10% 0px",
-    amount: 0.2,
+    margin: "0px 0px -40px 0px",
+    amount: 0.05,
   } as const,
 };
 
@@ -173,6 +173,32 @@ export const revealVariants: Variants = {
     opacity: 1,
     transition: {
       duration: DURATIONS.rowReveal,
+      ease: EASINGS.customSmooth,
+    } as Transition,
+  },
+};
+
+/** Stagger container for grid cards (0.08s sibling stagger) */
+export const cardContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+/** Motion variant for individual cards */
+export const cardItemVariants: Variants = {
+  hidden: {
+    y: 35,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.7,
       ease: EASINGS.customSmooth,
     } as Transition,
   },

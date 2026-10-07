@@ -13,12 +13,12 @@ export interface SectionHeadingProps {
  */
 export function SectionHeading({ children, className }: SectionHeadingProps) {
   return (
-    <div className={cn("mb-8", className)}>
+    <div className={cn("mb-9 sm:mb-10", className)}>
       <SplitText
         text={children}
         mode="chars"
         as="h3"
-        className="text-h3 text-fg leading-[1.05] font-[650] tracking-[-0.035em]"
+        className="text-h3 text-fg leading-[1.02] font-[650] tracking-[-0.04em]"
       />
     </div>
   );

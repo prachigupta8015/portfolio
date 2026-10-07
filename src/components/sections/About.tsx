@@ -5,10 +5,11 @@ import { useVersion } from "@/hooks/useVersion";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SplitText } from "@/components/motion/SplitText";
+import { StatsStrip } from "@/components/ui/StatsStrip";
 import { SECTION_IDS } from "@/lib/constants";
 
 /**
- * About section displaying narrative bio paragraphs.
+ * About section displaying narrative bio paragraphs and performance stats strip.
  * Paragraphs animate using SplitText in words mode.
  * The introductory paragraph is emphasized at 1.25rem in foreground color.
  */
@@ -48,6 +49,12 @@ export function About() {
           />
         )}
       </div>
+
+      {version.stats && version.stats.length > 0 && (
+        <div className="mt-12">
+          <StatsStrip stats={version.stats} />
+        </div>
+      )}
     </Section>
   );
 }

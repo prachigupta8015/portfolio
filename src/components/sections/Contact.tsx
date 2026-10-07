@@ -5,11 +5,12 @@ import { useVersion } from "@/hooks/useVersion";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { AvailabilityBadge } from "@/components/ui/AvailabilityBadge";
 import { SECTION_IDS } from "@/lib/constants";
 
 /**
- * Contact section providing communication channels, direct email link,
- * resume download button, and semantic footer copyright.
+ * Contact section providing communication channels, availability status badge,
+ * direct email link, resume download button, and footer copyright.
  */
 export function Contact() {
   const { version } = useVersion();
@@ -19,12 +20,22 @@ export function Contact() {
     <Section id={SECTION_IDS.CONTACT} aria-label="Contact" className="mb-16">
       <SectionHeading>Let&apos;s talk</SectionHeading>
 
+      {/* Availability Status Badge */}
+      {version.availability && (
+        <div className="mb-6">
+          <AvailabilityBadge
+            text={version.availability.text}
+            open={version.availability.open}
+          />
+        </div>
+      )}
+
       <p className="text-muted mb-8 max-w-[55ch] text-[1.05rem] leading-relaxed">
         {version.cta}
       </p>
 
       {/* Prominent CTA email link */}
-      <div className="mb-10">
+      <div className="mb-8">
         <a
           href={`mailto:${version.email}`}
           className="text-cta text-fg border-line hover:border-accent hover:text-accent inline-block border-b pb-1 font-semibold break-all transition-colors duration-300"

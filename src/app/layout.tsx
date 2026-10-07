@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Alex Vance — Senior Frontend Engineer & Architect",
+  title: "Your Name — Frontend Engineer",
   description:
-    "Minimalist, high-performance developer portfolio showcasing design systems, web performance, and modern interaction engineering.",
+    "Minimalist, high-performance developer portfolio showcasing fluid interactions, design systems, and frontend engineering.",
   icons: {
     icon: "/favicon.ico",
   },

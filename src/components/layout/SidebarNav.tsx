@@ -7,6 +7,7 @@ import { useScrollTo } from "@/components/providers/SmoothScrollProvider";
 
 const SECTION_ID_LIST = [
   SECTION_IDS.ABOUT,
+  SECTION_IDS.EXPERTISE,
   SECTION_IDS.EXPERIENCE,
   SECTION_IDS.PROJECTS,
   SECTION_IDS.CONTACT,

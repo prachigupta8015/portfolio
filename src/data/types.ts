@@ -3,12 +3,15 @@
  * Type definitions for portfolio content models, versioning, and structure.
  */
 
-export interface ExperienceItem {
-  when: string;
+export interface StatItem {
+  value: string;
+  label: string;
+}
+
+export interface ExpertiseItem {
   title: string;
-  org: string;
-  desc: string;
-  tags: string[];
+  description: string;
+  skills: string[];
 }
 
 export interface ProjectItem {
@@ -16,6 +19,38 @@ export interface ProjectItem {
   desc: string;
   tags: string[];
   link: string;
+  image?: string;
+  meta?: string;
+}
+
+export interface ExperienceItem {
+  when: string;
+  title: string;
+  org: string;
+  desc: string;
+  tags: string[];
+  location?: string;
+  companyUrl?: string;
+  logoText?: string;
+}
+
+export interface EducationItem {
+  period: string;
+  title: string;
+  org: string;
+  note?: string;
+}
+
+export interface TestimonialItem {
+  quote: string;
+  name: string;
+  role: string;
+  org: string;
+}
+
+export interface AvailabilityStatus {
+  open: boolean;
+  text: string;
 }
 
 export interface SocialLinks {
@@ -33,9 +68,16 @@ export interface PortfolioVersion {
   email: string;
   cta: string;
   about: [string, string, string];
+  stats: StatItem[];
+  expertise: [ExpertiseItem, ExpertiseItem, ExpertiseItem];
   experience: ExperienceItem[];
   projects: ProjectItem[];
+  stack: string[];
+  education: EducationItem[];
+  testimonials: TestimonialItem[];
+  availability: AvailabilityStatus;
   resumeUrl?: string;
+  archiveUrl?: string;
   socials?: SocialLinks;
 }
 

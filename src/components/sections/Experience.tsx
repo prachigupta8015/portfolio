@@ -29,6 +29,9 @@ export function Experience() {
               subtitle={item.org}
               description={item.desc}
               tags={item.tags}
+              logoText={item.logoText}
+              location={item.location}
+              companyUrl={item.companyUrl}
             />
           </Reveal>
         ))}
