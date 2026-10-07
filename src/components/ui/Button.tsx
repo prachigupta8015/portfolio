@@ -8,12 +8,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: "primary" | "outline";
   href?: string;
   external?: boolean;
+  download?: boolean | string;
 }
 
 /**
  * Reusable Pill Button component.
  * Supports primary and outline variants, smooth scrolling for internal anchors,
- * and external hyperlinks.
+ * file downloads, and external hyperlinks.
  */
 export const Button = React.forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
@@ -25,6 +26,7 @@ export const Button = React.forwardRef<
       variant = "primary",
       href,
       external = false,
+      download,
       className,
       onClick,
       ...props
@@ -58,9 +60,10 @@ export const Button = React.forwardRef<
         <a
           ref={ref as React.Ref<HTMLAnchorElement>}
           href={href}
+          download={download}
           onClick={handleClick}
-          target={external ? "_blank" : undefined}
-          rel={external ? "noopener noreferrer" : undefined}
+          target={external && !download ? "_blank" : undefined}
+          rel={external && !download ? "noopener noreferrer" : undefined}
           className={cn(baseStyles, variantStyles[variant], className)}
         >
           {children}

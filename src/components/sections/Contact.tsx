@@ -46,7 +46,15 @@ export function Contact() {
 
       {/* Resume CTA */}
       <div className="mb-20">
-        <Button variant="outline" href={version.resumeUrl || "#"} external>
+        <Button
+          variant="outline"
+          href={version.resumeUrl || "#"}
+          download={
+            version.resumeUrl && version.resumeUrl !== "#"
+              ? version.resumeFileName || "Prachi_Gupta_Resume.pdf"
+              : undefined
+          }
+        >
           Download résumé
         </Button>
       </div>

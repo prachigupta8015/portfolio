@@ -315,6 +315,7 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
       text: "Available for Software Engineer roles & opportunities",
     },
     resumeUrl: "/resume.pdf",
+    resumeFileName: "Prachi_Gupta_Resume.pdf",
     archiveUrl: "https://github.com/prachigupta8015",
     socials: {
       github: "https://github.com/prachigupta8015",

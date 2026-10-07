@@ -77,6 +77,7 @@ export interface PortfolioVersion {
   testimonials: TestimonialItem[];
   availability: AvailabilityStatus;
   resumeUrl?: string;
+  resumeFileName?: string;
   archiveUrl?: string;
   socials?: SocialLinks;
   photo?: string;
