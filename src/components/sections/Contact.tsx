@@ -38,7 +38,7 @@ export function Contact() {
       <div className="mb-8">
         <a
           href={`mailto:${version.email}`}
-          className="text-cta text-fg border-line hover:border-accent hover:text-accent inline-block border-b pb-1 font-semibold break-all transition-colors duration-300"
+          className="text-cta text-[clamp(1.6rem,4.5vw,3rem)] text-fg border-line hover:border-accent hover:text-accent inline-block border-b pb-1 font-semibold break-all transition-colors duration-300"
         >
           {version.email}
         </a>

@@ -140,7 +140,7 @@ export function Hero() {
             mode="chars"
             as="h1"
             hero
-            className="text-hero text-fg leading-[0.95] font-bold tracking-[-0.045em]"
+            className="text-hero text-[clamp(3rem,10.5vw,7rem)] text-fg leading-[0.95] font-bold tracking-[-0.045em]"
           />
         </div>
 

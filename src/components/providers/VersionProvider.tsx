@@ -26,6 +26,9 @@ export function VersionProvider({ children }: { children: React.ReactNode }) {
         setTimeout(() => {
           setKeyState(stored);
         }, 0);
+      } else if (stored) {
+        window.localStorage.removeItem(STORAGE_KEY_VERSION);
+        setKeyState(DEFAULT_VERSION_KEY);
       }
     } catch {
       // Ignore localStorage access failures (e.g. private mode / security restrictions)
