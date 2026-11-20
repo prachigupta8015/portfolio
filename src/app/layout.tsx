@@ -74,6 +74,15 @@ export default function RootLayout({
       suppressHydrationWarning
       className={bricolageGrotesque.variable}
     >
+      <head>
+        {/* Hide the intro overlay before first paint for returning visitors
+            (same session) or when reduced motion is requested. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("portfolio_intro_seen")==="1"||matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.setAttribute("data-skip-intro","")}}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <Providers>{children}</Providers>
       </body>

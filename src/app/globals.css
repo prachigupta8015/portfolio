@@ -292,3 +292,8 @@ html.lenis body {
 }
 
 
+
+/* Set by an inline script in layout.tsx for returning visitors / reduced motion */
+html[data-skip-intro] .preloader-root {
+  display: none;
+}

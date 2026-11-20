@@ -162,6 +162,7 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
   */
   frontend: {
     label: "Frontend",
+    watermark: "Web + Mobile",
     name: "Prachi Gupta",
     role: "Frontend & React Native Engineer",
     location: "Haryana, India",

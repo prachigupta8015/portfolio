@@ -37,10 +37,17 @@ export default function Home() {
       {/* Fixed bottom-right scroll-to-top floating button */}
       <ScrollToTop />
 
+      <a
+        href="#main-content"
+        className="bg-fg text-bg sr-only z-[60] rounded-full px-5 py-3 font-medium focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+      >
+        Skip to content
+      </a>
+
       <Hero />
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 px-[clamp(1.25rem,5vw,4rem)] min-[861px]:grid-cols-[minmax(250px,36%)_1fr] min-[861px]:gap-16">
         <Sidebar />
-        <main className="min-w-0 py-12 min-[861px]:py-20 min-[861px]:pb-24">
+        <main id="main-content" tabIndex={-1} className="min-w-0 outline-none py-12 min-[861px]:py-20 min-[861px]:pb-24">
           <About />
           <Expertise />
           <Experience />

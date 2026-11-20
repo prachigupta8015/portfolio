@@ -5,6 +5,29 @@ import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useVersion } from "@/hooks/useVersion";
 
+/** sessionStorage flag so the intro plays once per browser session. */
+export const INTRO_SEEN_KEY = "portfolio_intro_seen";
+/** Time the blob morphs at center before travelling (ms). */
+const CENTER_MS = 600;
+/** Travel animation length; keep in sync with the 0.95s travel transitions below (ms). */
+const TRAVEL_MS = 950;
+
+function hasSeenIntro(): boolean {
+  try {
+    return window.sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function markIntroSeen() {
+  try {
+    window.sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+  } catch {
+    // Storage can be unavailable (private mode); the intro simply replays.
+  }
+}
+
 const BLOB_KEYFRAMES = [
   "60% 40% 30% 70% / 60% 30% 70% 40%",
   "30% 70% 70% 30% / 30% 30% 70% 70%",
@@ -52,7 +75,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
     : "PG";
 
   useEffect(() => {
-    if (shouldReduceMotion) {
+    if (shouldReduceMotion || hasSeenIntro()) {
       const timer = setTimeout(() => {
         setPhase("settled");
         onComplete?.();
@@ -78,7 +101,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
       });
     });
 
-    // Morph at center for 1.1s, then initiate travel across to the portrait spot
+    // Morph at center briefly, then initiate travel across to the portrait spot
     const travelTimer = setTimeout(() => {
       const targetEl = document.getElementById("hero-portrait");
       if (targetEl) {
@@ -93,14 +116,15 @@ export function Preloader({ onComplete }: PreloaderProps) {
         }
       }
       setPhase("travelling");
-    }, 1150);
+    }, CENTER_MS);
 
-    // After travel completes (900ms duration), settle and hand off
+    // After travel completes, settle and hand off
     const settleTimer = setTimeout(() => {
       setPhase("settled");
       document.body.style.overflow = "";
+      markIntroSeen();
       onComplete?.();
-    }, 2150);
+    }, CENTER_MS + TRAVEL_MS);
 
     return () => {
       cancelAnimationFrame(startFrame);
@@ -121,7 +145,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
       <div
         ref={containerRef}
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-50 overflow-hidden select-none"
+        className="preloader-root pointer-events-none fixed inset-0 z-50 overflow-hidden select-none"
       >
         {/* Fullscreen Backdrop: Fades to 0 as the blob travels to its destination */}
         <motion.div

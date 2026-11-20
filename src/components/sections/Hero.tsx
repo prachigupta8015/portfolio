@@ -105,12 +105,12 @@ export function Hero() {
           <span
             className="block leading-none font-extrabold tracking-[-0.04em] whitespace-nowrap select-none"
             style={{
-              fontSize: "24vw",
+              fontSize: "12.5vw",
               color: "transparent",
               WebkitTextStroke: "1px var(--line)",
             }}
           >
-            {version.label}
+            {version.watermark ?? version.label}
           </span>
         </ParallaxLayer>
       </div>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { TagList } from "./TagList";
+import { ImageLightbox } from "./ImageLightbox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
@@ -65,6 +66,15 @@ export function ListItem({
   const isProjectRow = isProject ?? !leftLabel;
   const hasImage = Boolean(image) && !imageError;
   const isExternal = href?.startsWith("http") || href?.startsWith("//");
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+
+  // Screenshots open in a lightbox. Disabled when the whole row is a link,
+  // since buttons cannot be nested inside an <a>.
+  const viewerImages = [...(hasImage && image ? [image] : []), ...gallery];
+  const canZoom = !href && viewerImages.length > 0;
+  const galleryOffset = hasImage && image ? 1 : 0;
+  const zoomButtonClass =
+    "block h-full w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
 
   const rowContent = (
     <>
@@ -73,18 +83,34 @@ export function ListItem({
         <div className="w-full max-w-[16rem] shrink-0 min-[861px]:max-w-none">
           <div className="border-line group-hover:border-accent relative aspect-[16/9] w-full overflow-hidden rounded-[8px] border bg-[var(--card)] transition-colors duration-300">
             {hasImage && image ? (
-              <Image
-                src={image}
-                alt={title}
-                width={320}
-                height={180}
-                loading="lazy"
-                onError={() => setImageError(true)}
-                className={cn(
-                  "h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]",
-                  imagePosition === "center" ? "object-center" : "object-top"
-                )}
-              />
+              (() => {
+                const img = (
+                  <Image
+                    src={image}
+                    alt={`${title} screenshot`}
+                    width={320}
+                    height={180}
+                    loading="lazy"
+                    onError={() => setImageError(true)}
+                    className={cn(
+                      "h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] hover:scale-[1.03]",
+                      imagePosition === "center" ? "object-center" : "object-top"
+                    )}
+                  />
+                );
+                return canZoom ? (
+                  <button
+                    type="button"
+                    onClick={() => setViewerIndex(0)}
+                    aria-label={`View ${title} screenshots`}
+                    className={zoomButtonClass}
+                  >
+                    {img}
+                  </button>
+                ) : (
+                  img
+                );
+              })()
             ) : (
               <div
                 className="flex h-full w-full items-center justify-center p-3 text-center select-none"
@@ -184,21 +210,37 @@ export function ListItem({
         {/* Optional phone-shaped screenshot strip */}
         {gallery.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2.5">
-            {gallery.map((src, i) => (
-              <div
-                key={src}
-                className="border-line relative aspect-[9/16] w-[4.5rem] overflow-hidden rounded-[10px] border bg-[var(--card)] sm:w-[5rem]"
-              >
+            {gallery.map((src, i) => {
+              const thumb = (
                 <Image
                   src={src}
-                  alt={`${title} screenshot ${i + 1}`}
+                  alt={`${title} screenshot ${i + 1 + galleryOffset}`}
                   fill
                   loading="lazy"
                   sizes="5rem"
-                  className="object-cover object-top"
+                  className="object-cover object-top transition-transform duration-300 hover:scale-[1.05]"
                 />
-              </div>
-            ))}
+              );
+              return (
+                <div
+                  key={src}
+                  className="border-line hover:border-accent relative aspect-[9/16] w-[4.5rem] overflow-hidden rounded-[10px] border bg-[var(--card)] transition-colors sm:w-[5rem]"
+                >
+                  {canZoom ? (
+                    <button
+                      type="button"
+                      onClick={() => setViewerIndex(i + galleryOffset)}
+                      aria-label={`View ${title} screenshot ${i + 1 + galleryOffset}`}
+                      className={cn(zoomButtonClass, "relative")}
+                    >
+                      {thumb}
+                    </button>
+                  ) : (
+                    thumb
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
@@ -236,5 +278,17 @@ export function ListItem({
     );
   }
 
-  return <div className={sharedClasses}>{rowContent}</div>;
+  return (
+    <div className={sharedClasses}>
+      {rowContent}
+      {canZoom && (
+        <ImageLightbox
+          images={viewerImages}
+          index={viewerIndex}
+          title={title}
+          onIndexChange={setViewerIndex}
+        />
+      )}
+    </div>
+  );
 }

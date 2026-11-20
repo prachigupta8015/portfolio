@@ -76,6 +76,8 @@ export interface SocialLinks {
 
 export interface PortfolioVersion {
   label: string;
+  /** Outlined background text in the hero. Defaults to `label`. */
+  watermark?: string;
   name: string;
   role: string;
   location?: string;

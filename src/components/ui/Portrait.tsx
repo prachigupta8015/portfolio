@@ -70,30 +70,16 @@ export function Portrait({
     }
   };
 
-  const handleFocus = () => {
-    if (!shouldReduceMotion) {
-      setIsHovered(true);
-    }
-  };
-
-  const handleBlur = () => {
-    if (!shouldReduceMotion) {
-      setIsHovered(false);
-    }
-  };
 
   return (
     <div
       id={id}
-      tabIndex={0}
       role="img"
       aria-label={`Portrait of ${name}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
       className={cn(
-        "group relative aspect-[1/1.05] w-[14rem] shrink-0 cursor-pointer outline-none select-none focus-visible:ring-2 focus-visible:ring-accent sm:w-[17rem] md:w-[19rem] min-[861px]:w-[21.5rem] lg:w-[23.5rem]",
+        "group relative aspect-[1/1.05] w-[14rem] shrink-0 select-none sm:w-[17rem] md:w-[19rem] min-[861px]:w-[21.5rem] lg:w-[23.5rem]",
         className
       )}
     >
@@ -165,7 +151,7 @@ export function Portrait({
             priority
             fill
             sizes="(max-width: 640px) 14rem, (max-width: 860px) 19rem, 23.5rem"
-            className="object-cover object-top grayscale-[0.35] transition-[filter,transform] duration-500 group-hover:scale-[1.04] group-hover:grayscale-0 group-focus:scale-[1.04] group-focus:grayscale-0"
+            className="object-cover object-top grayscale-[0.35] transition-[filter,transform] duration-500 group-hover:scale-[1.04] group-hover:grayscale-0"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#a5b4fc] via-[#c7d2fe] to-[#dbe4ff] text-[#14152a] select-none dark:from-[#353c6e] dark:via-[#222749] dark:to-[#14162b] dark:text-[#ecebf3]">
