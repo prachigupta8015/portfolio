@@ -6,7 +6,6 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SECTION_IDS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
-import { TagList } from "@/components/ui/TagList";
 import { Reveal } from "@/components/motion/Reveal";
 
 export interface StackMarqueeProps {
@@ -79,22 +78,52 @@ export function StackMarquee({ className }: StackMarqueeProps) {
         </div>
       </div>
 
-      {/* Categorized skills (mirrors the résumé) */}
+      {/* Categorized skills (mirrors the résumé): one card per category,
+          items as a clean dot-separated list instead of chips. */}
       {groups.length > 0 && (
-        <dl className="border-line mt-8 flex flex-col border-t">
+        <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {groups.map((group) => (
-            <Reveal key={group.category}>
-              <div className="border-line grid grid-cols-1 gap-3 border-b py-5 min-[861px]:grid-cols-[10rem_1fr] min-[861px]:gap-6">
-                <dt className="text-fg text-[0.95rem] font-semibold tracking-tight">
-                  {group.category}
-                </dt>
-                <dd>
-                  <TagList tags={group.items} className="pt-0" />
-                </dd>
-              </div>
-            </Reveal>
+            <li
+              key={group.category}
+              className="h-full sm:[&:last-child:nth-child(odd)]:col-span-2"
+            >
+              <Reveal className="h-full">
+                <div className="border-line hover:border-accent h-full rounded-[14px] border bg-[var(--card)] p-5 transition-colors duration-300">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-fg text-[1rem] font-semibold tracking-tight">
+                      {group.category}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      className="text-muted text-[0.78rem] tabular-nums"
+                    >
+                      {String(group.items.length).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="bg-accent mt-2.5 mb-3.5 block h-[2px] w-8 rounded-full"
+                  />
+                  <ul className="text-muted flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[0.93rem] leading-snug">
+                    {group.items.map((item, i) => (
+                      <li key={item} className="flex items-center gap-2">
+                        {i > 0 && (
+                          <span
+                            aria-hidden="true"
+                            className="bg-accent h-1 w-1 rounded-full opacity-60"
+                          />
+                        )}
+                        <span className="hover:text-fg transition-colors">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            </li>
           ))}
-        </dl>
+        </ul>
       )}
     </Section>
   );

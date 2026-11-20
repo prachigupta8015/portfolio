@@ -45,7 +45,7 @@ export default function Home() {
       </a>
 
       <Hero />
-      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-8 px-[clamp(1.25rem,5vw,4rem)] min-[861px]:grid-cols-[minmax(250px,36%)_1fr] min-[861px]:gap-16">
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-8 px-[clamp(1.25rem,3vw,2.5rem)] min-[861px]:grid-cols-[minmax(240px,28%)_1fr] min-[861px]:gap-12 min-[1200px]:gap-16">
         <Sidebar />
         <main id="main-content" tabIndex={-1} className="min-w-0 outline-none py-12 min-[861px]:py-20 min-[861px]:pb-24">
           <About />

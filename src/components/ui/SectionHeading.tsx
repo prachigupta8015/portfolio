@@ -15,7 +15,7 @@ export interface SectionHeadingProps {
 export function SectionHeading({
   children,
   className,
-  as = "h1",
+  as = "h2",
 }: SectionHeadingProps) {
   return (
     <div className={cn("mb-9 sm:mb-11", className)}>

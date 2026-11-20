@@ -88,7 +88,7 @@ export interface PortfolioVersion {
   cta: string;
   about: [string, string, string];
   stats: StatItem[];
-  expertise: [ExpertiseItem, ExpertiseItem, ExpertiseItem];
+  expertise: ExpertiseItem[];
   experience: ExperienceItem[];
   projects: ProjectItem[];
   stack: string[];

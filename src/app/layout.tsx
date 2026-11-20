@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { Providers } from "@/components/providers/Providers";
+import { PersonJsonLd } from "@/components/seo/PersonJsonLd";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -25,15 +27,9 @@ const SITE_TITLE = "Prachi Gupta — Frontend & React Native Engineer";
 const SITE_DESCRIPTION =
   "Portfolio of Prachi Gupta, a Frontend & React Native Engineer with 2+ years of experience shipping production web and mobile apps with React, React Native, and TypeScript.";
 
-// Set NEXT_PUBLIC_SITE_URL to the deployed domain so social previews use absolute URLs.
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   authors: [{ name: "Prachi Gupta" }],
@@ -44,6 +40,8 @@ export const metadata: Metadata = {
     "React",
     "Next.js",
     "TypeScript",
+    "Mobile App Developer",
+    "React Developer",
     "Portfolio",
   ],
   openGraph: {
@@ -51,6 +49,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     siteName: "Prachi Gupta",
+    url: "/",
     locale: "en_US",
   },
   twitter: {
@@ -82,6 +81,7 @@ export default function RootLayout({
             __html: `try{if(sessionStorage.getItem("portfolio_intro_seen")==="1"||matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.setAttribute("data-skip-intro","")}}catch(e){}`,
           }}
         />
+        <PersonJsonLd />
       </head>
       <body className="font-sans antialiased">
         <Providers>{children}</Providers>

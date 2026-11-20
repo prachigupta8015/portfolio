@@ -10,8 +10,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SECTION_IDS } from "@/lib/constants";
 
 /**
- * Expertise section displaying 3 core competence cards in a responsive grid.
- * Stacks to 1 column on mobile and 3 columns on desktop screens.
+ * Expertise section displaying core competence cards in a responsive grid.
+ * Stacks to 1 column on mobile and a 2-column grid (2x2 for four cards) from 768px.
  * Animates siblings into view with Reveal wrappers.
  */
 export function Expertise() {
@@ -21,13 +21,13 @@ export function Expertise() {
     <Section id={SECTION_IDS.EXPERTISE} aria-label="Expertise">
       <SectionHeading>Expertise</SectionHeading>
 
-      <div className="grid grid-cols-1 gap-5 min-[861px]:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {version.expertise.map((item, index) => (
           <Reveal key={`${item.title}-${index}`} className="h-full">
-            <Card className="flex h-full flex-col p-6">
-              <h4 className="text-fg text-[1.15rem] font-semibold tracking-tight">
+            <Card className="flex h-full flex-col p-6 sm:p-7">
+              <h3 className="text-fg text-[1.15rem] font-semibold tracking-tight">
                 {item.title}
-              </h4>
+              </h3>
               <p className="text-muted mt-2.5 mb-6 text-[0.95rem] leading-relaxed">
                 {item.description}
               </p>

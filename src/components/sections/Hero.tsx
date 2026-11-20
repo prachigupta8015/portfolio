@@ -43,7 +43,7 @@ export function Hero() {
   return (
     <header
       ref={heroRef}
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-[clamp(1.25rem,5vw,4rem)]"
+      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-[clamp(1.25rem,3vw,2.5rem)]"
     >
       {/* Decorative Layer 1: Background Grid (speed 12) */}
       <div aria-hidden="true" className="pointer-events-none">
@@ -129,7 +129,7 @@ export function Hero() {
         variants={heroEntranceContainerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col-reverse items-start justify-between gap-6 py-8 sm:gap-8 sm:py-12 min-[861px]:flex-row min-[861px]:items-center min-[861px]:gap-12 min-[861px]:py-16"
+        className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col-reverse items-start justify-between gap-6 py-8 sm:gap-8 sm:py-12 min-[861px]:flex-row min-[861px]:items-center min-[861px]:gap-12 min-[861px]:py-16"
       >
         {/* Text column (Desktop left / Mobile below portrait) */}
         <div className="relative z-10 flex-1 min-w-0">

@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import { cn } from "@/lib/cn";
 import { TagList } from "./TagList";
-import { ImageLightbox } from "./ImageLightbox";
+import { ProjectCarousel } from "./ProjectCarousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
@@ -62,74 +61,44 @@ export function ListItem({
   status,
   isProject,
 }: ListItemProps) {
-  const [imageError, setImageError] = useState(false);
   const isProjectRow = isProject ?? !leftLabel;
-  const hasImage = Boolean(image) && !imageError;
   const isExternal = href?.startsWith("http") || href?.startsWith("//");
-  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
-  // Screenshots open in a lightbox. Disabled when the whole row is a link,
-  // since buttons cannot be nested inside an <a>.
-  const viewerImages = [...(hasImage && image ? [image] : []), ...gallery];
-  const canZoom = !href && viewerImages.length > 0;
-  const galleryOffset = hasImage && image ? 1 : 0;
-  const zoomButtonClass =
-    "block h-full w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent";
+  // Cover image + gallery feed the carousel. Its controls are hidden when the
+  // whole row is a link, since buttons cannot nest inside an <a>.
+  const viewerImages = [...(image ? [image] : []), ...gallery];
 
   const rowContent = (
     <>
       {/* Left Column: Project Thumbnail or Experience Date */}
       {isProjectRow ? (
-        <div className="w-full max-w-[16rem] shrink-0 min-[861px]:max-w-none">
-          <div className="border-line group-hover:border-accent relative aspect-[16/9] w-full overflow-hidden rounded-[8px] border bg-[var(--card)] transition-colors duration-300">
-            {hasImage && image ? (
-              (() => {
-                const img = (
-                  <Image
-                    src={image}
-                    alt={`${title} screenshot`}
-                    width={320}
-                    height={180}
-                    loading="lazy"
-                    onError={() => setImageError(true)}
-                    className={cn(
-                      "h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] hover:scale-[1.03]",
-                      imagePosition === "center" ? "object-center" : "object-top"
-                    )}
-                  />
-                );
-                return canZoom ? (
-                  <button
-                    type="button"
-                    onClick={() => setViewerIndex(0)}
-                    aria-label={`View ${title} screenshots`}
-                    className={zoomButtonClass}
-                  >
-                    {img}
-                  </button>
-                ) : (
-                  img
-                );
-              })()
-            ) : (
-              <div
-                className="flex h-full w-full items-center justify-center p-3 text-center select-none"
-                style={{
-                  background:
-                    "linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--card)) 0%, color-mix(in srgb, var(--line) 40%, transparent) 100%)",
-                }}
-              >
-                <span className="text-accent text-[1.05rem] font-bold tracking-tight opacity-90">
-                  {title
-                    .split(/\s+/)
-                    .slice(0, 2)
-                    .map((w) => w[0])
-                    .join("")
-                    .toUpperCase()}
-                </span>
-              </div>
-            )}
-          </div>
+        <div className="w-full shrink-0">
+          {viewerImages.length > 0 ? (
+            <ProjectCarousel
+              images={viewerImages}
+              title={title}
+              imagePosition={imagePosition}
+              interactive={!href}
+              className="mx-auto aspect-[4/5] w-full max-w-[22rem] sm:mx-0 sm:max-w-[18rem] min-[861px]:max-w-none"
+            />
+          ) : (
+            <div
+              className="border-line flex aspect-[4/5] w-full max-w-[18rem] items-center justify-center rounded-[12px] border p-3 text-center select-none min-[861px]:max-w-none"
+              style={{
+                background:
+                  "linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, var(--card)) 0%, color-mix(in srgb, var(--line) 40%, transparent) 100%)",
+              }}
+            >
+              <span className="text-accent text-[1.4rem] font-bold tracking-tight opacity-90">
+                {title
+                  .split(/\s+/)
+                  .slice(0, 2)
+                  .map((w) => w[0])
+                  .join("")
+                  .toUpperCase()}
+              </span>
+            </div>
+          )}
         </div>
       ) : (
         <div className="text-muted flex flex-col text-[0.9rem] tracking-normal">
@@ -153,7 +122,7 @@ export function ListItem({
           )}
 
           <div>
-            <h4 className="item-title text-fg group-hover:text-accent flex flex-wrap items-baseline gap-x-1.5 text-[1.15rem] font-semibold tracking-tight transition-colors duration-300">
+            <h3 className="item-title text-fg group-hover:text-accent flex flex-wrap items-baseline gap-x-1.5 text-[1.15rem] font-semibold tracking-tight transition-colors duration-300">
               <span>{title}</span>
               {subtitle && (
                 <span className="text-muted text-[1.05rem] font-normal">
@@ -181,7 +150,7 @@ export function ListItem({
                   {status}
                 </span>
               )}
-            </h4>
+            </h3>
           </div>
         </div>
 
@@ -207,43 +176,6 @@ export function ListItem({
           </ul>
         )}
 
-        {/* Optional phone-shaped screenshot strip */}
-        {gallery.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2.5">
-            {gallery.map((src, i) => {
-              const thumb = (
-                <Image
-                  src={src}
-                  alt={`${title} screenshot ${i + 1 + galleryOffset}`}
-                  fill
-                  loading="lazy"
-                  sizes="5rem"
-                  className="object-cover object-top transition-transform duration-300 hover:scale-[1.05]"
-                />
-              );
-              return (
-                <div
-                  key={src}
-                  className="border-line hover:border-accent relative aspect-[9/16] w-[4.5rem] overflow-hidden rounded-[10px] border bg-[var(--card)] transition-colors sm:w-[5rem]"
-                >
-                  {canZoom ? (
-                    <button
-                      type="button"
-                      onClick={() => setViewerIndex(i + galleryOffset)}
-                      aria-label={`View ${title} screenshot ${i + 1 + galleryOffset}`}
-                      className={cn(zoomButtonClass, "relative")}
-                    >
-                      {thumb}
-                    </button>
-                  ) : (
-                    thumb
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-
         {/* Optional Meta Line in fg colour at .92rem */}
         {meta && (
           <p className="text-fg mt-2 text-[0.92rem] font-medium">{meta}</p>
@@ -258,7 +190,7 @@ export function ListItem({
   const sharedClasses = cn(
     "list-row list-item relative -mx-[1.25rem] rounded-[14px] px-[1.25rem] py-[1.6rem] transition-all duration-350",
     isProjectRow
-      ? "grid grid-cols-1 items-start gap-6 min-[861px]:grid-cols-[10rem_1fr]"
+      ? "grid grid-cols-1 items-start gap-6 min-[861px]:gap-8 min-[861px]:grid-cols-[13rem_1fr] min-[1100px]:grid-cols-[15rem_1fr]"
       : "grid grid-cols-1 items-baseline gap-2 min-[861px]:grid-cols-[8.5rem_1fr] min-[861px]:gap-6",
     href &&
       "group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent",
@@ -281,14 +213,6 @@ export function ListItem({
   return (
     <div className={sharedClasses}>
       {rowContent}
-      {canZoom && (
-        <ImageLightbox
-          images={viewerImages}
-          index={viewerIndex}
-          title={title}
-          onIndexChange={setViewerIndex}
-        />
-      )}
     </div>
   );
 }
