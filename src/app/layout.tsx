@@ -21,10 +21,43 @@ export const viewport: Viewport = {
   ],
 };
 
+const SITE_TITLE = "Prachi Gupta — Frontend & React Native Engineer";
+const SITE_DESCRIPTION =
+  "Portfolio of Prachi Gupta, a Frontend & React Native Engineer with 2+ years of experience shipping production web and mobile apps with React, React Native, and TypeScript.";
+
+// Set NEXT_PUBLIC_SITE_URL to the deployed domain so social previews use absolute URLs.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "Prachi Gupta — Frontend & React Native Engineer",
-  description:
-    "Portfolio of Prachi Gupta, a Frontend & React Native Engineer with 2+ years of experience shipping production web and mobile apps with React, React Native, and TypeScript.",
+  metadataBase: new URL(siteUrl),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  authors: [{ name: "Prachi Gupta" }],
+  keywords: [
+    "Prachi Gupta",
+    "Frontend Engineer",
+    "React Native Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Portfolio",
+  ],
+  openGraph: {
+    type: "website",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: "Prachi Gupta",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
   icons: {
     icon: "/favicon.ico",
   },

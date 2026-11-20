@@ -32,10 +32,15 @@ export function Projects() {
             <ListItem
               title={project.title}
               description={project.desc}
+              highlights={project.highlights}
               tags={project.tags}
               href={project.link}
               image={project.image}
+              imagePosition={project.imagePosition}
+              gallery={project.gallery}
               meta={project.meta}
+              status={project.status}
+              isProject
             />
           </Reveal>
         ))}

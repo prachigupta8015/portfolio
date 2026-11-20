@@ -6,6 +6,8 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SECTION_IDS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
+import { TagList } from "@/components/ui/TagList";
+import { Reveal } from "@/components/motion/Reveal";
 
 export interface StackMarqueeProps {
   className?: string;
@@ -26,6 +28,7 @@ export interface StackMarqueeProps {
 export function StackMarquee({ className }: StackMarqueeProps) {
   const { version } = useVersion();
   const stack = version.stack || [];
+  const groups = version.skillGroups || [];
 
   if (stack.length === 0) return null;
 
@@ -75,6 +78,24 @@ export function StackMarquee({ className }: StackMarqueeProps) {
           </div>
         </div>
       </div>
+
+      {/* Categorized skills (mirrors the résumé) */}
+      {groups.length > 0 && (
+        <dl className="border-line mt-8 flex flex-col border-t">
+          {groups.map((group) => (
+            <Reveal key={group.category}>
+              <div className="border-line grid grid-cols-1 gap-3 border-b py-5 min-[861px]:grid-cols-[10rem_1fr] min-[861px]:gap-6">
+                <dt className="text-fg text-[0.95rem] font-semibold tracking-tight">
+                  {group.category}
+                </dt>
+                <dd>
+                  <TagList tags={group.items} className="pt-0" />
+                </dd>
+              </div>
+            </Reveal>
+          ))}
+        </dl>
+      )}
     </Section>
   );
 }

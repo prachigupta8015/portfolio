@@ -11,6 +11,7 @@ export interface ListItemProps {
   title: string;
   subtitle?: string;
   description: string;
+  highlights?: string[];
   tags?: string[];
   href?: string;
   className?: string;
@@ -19,7 +20,10 @@ export interface ListItemProps {
   companyUrl?: string;
   logoText?: string;
   image?: string;
+  imagePosition?: "top" | "center";
+  gallery?: string[];
   meta?: string;
+  status?: string;
   isProject?: boolean;
 }
 
@@ -42,6 +46,7 @@ export function ListItem({
   title,
   subtitle,
   description,
+  highlights = [],
   tags = [],
   href,
   className,
@@ -50,7 +55,10 @@ export function ListItem({
   companyUrl,
   logoText,
   image,
+  imagePosition = "top",
+  gallery = [],
   meta,
+  status,
   isProject,
 }: ListItemProps) {
   const [imageError, setImageError] = useState(false);
@@ -72,7 +80,10 @@ export function ListItem({
                 height={180}
                 loading="lazy"
                 onError={() => setImageError(true)}
-                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                className={cn(
+                  "h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]",
+                  imagePosition === "center" ? "object-center" : "object-top"
+                )}
               />
             ) : (
               <div
@@ -83,7 +94,12 @@ export function ListItem({
                 }}
               >
                 <span className="text-accent text-[1.05rem] font-bold tracking-tight opacity-90">
-                  {title.slice(0, 2).toUpperCase()}
+                  {title
+                    .split(/\s+/)
+                    .slice(0, 2)
+                    .map((w) => w[0])
+                    .join("")
+                    .toUpperCase()}
                 </span>
               </div>
             )}
@@ -111,11 +127,10 @@ export function ListItem({
           )}
 
           <div>
-            <h4 className="item-title text-fg group-hover:text-accent inline-flex items-center gap-1.5 text-[1.15rem] font-semibold tracking-tight transition-colors duration-300">
+            <h4 className="item-title text-fg group-hover:text-accent flex flex-wrap items-baseline gap-x-1.5 text-[1.15rem] font-semibold tracking-tight transition-colors duration-300">
               <span>{title}</span>
               {subtitle && (
                 <span className="text-muted text-[1.05rem] font-normal">
-                  {" "}
                   at{" "}
                   {companyUrl ? (
                     <a
@@ -135,6 +150,11 @@ export function ListItem({
               {href && (
                 <FontAwesomeIcon icon={faLink} className="w-2 h-2" />
               )}
+              {status && (
+                <span className="border-accent text-accent self-center rounded-full border px-2 py-0.5 text-[0.7rem] font-medium tracking-wide whitespace-nowrap uppercase">
+                  {status}
+                </span>
+              )}
             </h4>
           </div>
         </div>
@@ -144,6 +164,42 @@ export function ListItem({
           <p className="text-muted mt-2 text-[0.98rem] leading-relaxed">
             {description}
           </p>
+        )}
+
+        {/* Optional result-first bullet points */}
+        {highlights.length > 0 && (
+          <ul className="text-muted mt-3 flex flex-col gap-2 text-[0.96rem] leading-relaxed">
+            {highlights.map((point, i) => (
+              <li key={i} className="flex gap-3">
+                <span
+                  aria-hidden="true"
+                  className="bg-accent mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full"
+                />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Optional phone-shaped screenshot strip */}
+        {gallery.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            {gallery.map((src, i) => (
+              <div
+                key={src}
+                className="border-line relative aspect-[9/16] w-[4.5rem] overflow-hidden rounded-[10px] border bg-[var(--card)] sm:w-[5rem]"
+              >
+                <Image
+                  src={src}
+                  alt={`${title} screenshot ${i + 1}`}
+                  fill
+                  loading="lazy"
+                  sizes="5rem"
+                  className="object-cover object-top"
+                />
+              </div>
+            ))}
+          </div>
         )}
 
         {/* Optional Meta Line in fg colour at .92rem */}

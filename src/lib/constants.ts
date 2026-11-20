@@ -37,6 +37,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
     href: `#${SECTION_IDS.PROJECTS}`,
     id: SECTION_IDS.PROJECTS,
   },
+  { label: "Skills", href: `#${SECTION_IDS.STACK}`, id: SECTION_IDS.STACK },
   {
     label: "Contact",
     href: `#${SECTION_IDS.CONTACT}`,

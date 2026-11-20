@@ -17,10 +17,19 @@ export interface ExpertiseItem {
 export interface ProjectItem {
   title: string;
   desc: string;
+  /** Optional result-first bullet points. */
+  highlights?: string[];
   tags: string[];
-  link: string;
+  /** Public URL (store listing, live site, repo). Omit for private client work. */
+  link?: string;
   image?: string;
+  /** Thumbnail crop anchor. Defaults to "top" (suits phone screenshots). */
+  imagePosition?: "top" | "center";
+  /** Extra screenshots shown as a phone-shaped thumbnail strip. */
+  gallery?: string[];
   meta?: string;
+  /** Short status badge, e.g. "In progress". */
+  status?: string;
 }
 
 export interface ExperienceItem {
@@ -28,10 +37,17 @@ export interface ExperienceItem {
   title: string;
   org: string;
   desc: string;
+  /** Optional result-first bullet points rendered under the description. */
+  highlights?: string[];
   tags: string[];
   location?: string;
   companyUrl?: string;
   logoText?: string;
+}
+
+export interface SkillGroup {
+  category: string;
+  items: string[];
 }
 
 export interface EducationItem {
@@ -74,6 +90,8 @@ export interface PortfolioVersion {
   experience: ExperienceItem[];
   projects: ProjectItem[];
   stack: string[];
+  /** Categorized skills shown under the marquee. */
+  skillGroups?: SkillGroup[];
   education: EducationItem[];
   testimonials: TestimonialItem[];
   availability: AvailabilityStatus;

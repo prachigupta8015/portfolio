@@ -14,7 +14,6 @@ import { SECTION_IDS } from "@/lib/constants";
  */
 export function Contact() {
   const { version } = useVersion();
-  const currentYear = 2026;
 
   return (
     <Section id={SECTION_IDS.CONTACT} aria-label="Contact" className="mb-16">
@@ -51,7 +50,7 @@ export function Contact() {
           href={version.resumeUrl || "#"}
           download={
             version.resumeUrl && version.resumeUrl !== "#"
-              ? version.resumeFileName || "Prachi_Gupta_Resume.pdf"
+              ? version.resumeFileName || true
               : undefined
           }
         >
@@ -65,7 +64,7 @@ export function Contact() {
           Designed &amp; built with Next.js, Tailwind CSS &amp; Framer Motion.
         </span>
         <span>
-          &copy; {currentYear} {version.name}.
+          &copy; {version.name}.
         </span>
       </footer>
     </Section>

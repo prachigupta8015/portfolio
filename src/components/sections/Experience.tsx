@@ -28,6 +28,7 @@ export function Experience() {
               title={item.title}
               subtitle={item.org}
               description={item.desc}
+              highlights={item.highlights}
               tags={item.tags}
               logoText={item.logoText}
               location={item.location}
