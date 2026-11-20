@@ -16,7 +16,7 @@ import {
  * Displays name, role, section navigation, version switcher, and social icon buttons.
  */
 export function Sidebar() {
-  const { version } = useVersion();
+  const { version, keys } = useVersion();
   const socials = version.socials || {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
@@ -32,6 +32,9 @@ export function Sidebar() {
         <p className="text-muted mt-1 text-[1.05rem] leading-normal font-normal">
           {version.role}
         </p>
+        {version.location && (
+          <p className="text-muted mt-0.5 text-[0.9rem]">{version.location}</p>
+        )}
 
         {/* Navigation hidden on screens <= 860px */}
         <div className="hidden min-[861px]:block">
@@ -41,12 +44,14 @@ export function Sidebar() {
 
       {/* Bottom area: Version switcher pills & Social icons */}
       <div className="mt-12 flex flex-col gap-6 min-[861px]:mt-0">
-        <div>
-          <span className="text-muted mb-2.5 block text-[0.8rem] tracking-wider uppercase">
-            Specialization
-          </span>
-          <VersionSwitcher />
-        </div>
+        {keys.length > 1 && (
+          <div>
+            <span className="text-muted mb-2.5 block text-[0.8rem] tracking-wider uppercase">
+              Specialization
+            </span>
+            <VersionSwitcher />
+          </div>
+        )}
 
         {/* Social Icons row (GitHub & LinkedIn) */}
         <div className="text-muted flex items-center gap-4">

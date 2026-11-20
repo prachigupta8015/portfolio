@@ -162,27 +162,28 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
   */
   frontend: {
     label: "Frontend",
-    name: "Prachi",
-    role: "Software Engineer",
+    name: "Prachi Gupta",
+    role: "Frontend & React Native Engineer",
+    location: "Haryana, India",
     hello: "Hi, I'm",
     pre: "I build ",
     typed: [
-      "scalable web apps",
-      "cross-platform mobile apps",
-      "high-performance UI systems",
+      "production React web apps",
+      "cross-platform React Native apps",
+      "AI-powered product features",
     ],
     email: "prachigupta8015@gmail.com",
-    cta: "Interested in building scalable web and mobile applications, high-performance interfaces, or robust frontend architectures? Let's connect.",
+    cta: "Looking for a Frontend or React Native engineer to ship polished web and mobile products? Let's connect.",
     about: [
-      "I'm a Software Engineer with experience building scalable web and mobile applications using React, React Native, Angular, TypeScript, Node.js, and REST APIs.",
-      "At Daffodil Software, I develop production features for enterprise-scale platforms, optimize application performance by 35%, implement secure RBAC authentication, and resolve security vulnerabilities across web and mobile systems.",
-      "Passionate about learning emerging technologies and engineering reliable, user-focused solutions in collaborative, fast-paced environments.",
+      "I'm a Frontend & React Native Engineer with 2+ years of experience delivering production web and mobile apps in React, React Native, and TypeScript.",
+      "At Daffodil Software, I've delivered 3 client applications across education, healthcare, and transportation, owning features from requirements to release. I cut page load time by 35%, upgraded legacy React codebases, remediated SAST security findings, and built a shared form engine reused across projects.",
+      "Lately I've been building AI-enabled workflows, such as AI-generated assessments and automated answer scoring, and bilingual English/Arabic mobile experiences with full RTL support.",
     ],
     stats: [
-      { value: "35%", label: "Performance boost delivered" },
-      { value: "20+", label: "Production issues resolved" },
-      { value: "4+", label: "Enterprise roles supported" },
-      { value: "8.07", label: "B.Tech Engineering GPA" },
+      { value: "2+", label: "Years in production engineering" },
+      { value: "3", label: "Client apps delivered" },
+      { value: "35%", label: "Faster page loads" },
+      { value: "2", label: "Platforms from one codebase (iOS & Android)" },
     ],
     expertise: [
       {
@@ -257,7 +258,7 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
     experience: [
       {
         when: "Sep 2024 — Present",
-        title: "Software Engineer",
+        title: "Software Engineer, Frontend",
         org: "Daffodil Software Ltd.",
         location: "Haryana, India",
         companyUrl: "https://www.daffodilsw.com",
@@ -305,14 +306,14 @@ export const VERSIONS: Record<string, PortfolioVersion> = {
       {
         period: "2021 — 2025",
         title: "Bachelor of Computer Science and Engineering",
-        org: "Panipat Institute of Engineering and Technology",
-        note: "GPA: 8.07 · Focus on scalable web and cross-platform mobile application development, frontend architectures, algorithms, and database systems.",
+        org: "Kurukshetra University",
+        note: "GPA: 8.07 · Panipat Institute of Engineering and Technology. Coursework in data structures & algorithms, database systems, and web development.",
       },
     ],
     testimonials: [],
     availability: {
       open: true,
-      text: "Available for Software Engineer roles & opportunities",
+      text: "Open to Frontend & React Native roles",
     },
     resumeUrl: "/resume.pdf",
     resumeFileName: "Prachi_Gupta_Resume.pdf",

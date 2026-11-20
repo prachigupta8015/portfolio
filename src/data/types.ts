@@ -62,6 +62,7 @@ export interface PortfolioVersion {
   label: string;
   name: string;
   role: string;
+  location?: string;
   hello: string;
   pre: string;
   typed: [string, string, string];

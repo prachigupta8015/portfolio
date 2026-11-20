@@ -17,6 +17,11 @@ import {
   heroEntranceItemVariants,
 } from "@/lib/motion";
 import { Portrait } from "@/components/ui/Portrait";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowDown,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 
 /**
  * Hero section with layered decorative parallax, chromatic character reveal,
@@ -164,10 +169,42 @@ export function Hero() {
             <Button variant="primary" href="#projects">
               View work
             </Button>
+            {version.resumeUrl && version.resumeUrl !== "#" && (
+              <Button
+                variant="outline"
+                href={version.resumeUrl}
+                download={version.resumeFileName || true}
+              >
+                <FontAwesomeIcon icon={faArrowDown} className="mr-2 h-3 w-3" />
+                Résumé
+              </Button>
+            )}
             <Button variant="outline" href="#contact">
               Get in touch
             </Button>
           </motion.div>
+
+          {version.location && (
+            <motion.p
+              variants={heroEntranceItemVariants}
+              className="text-muted mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.95rem]"
+            >
+              <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                <FontAwesomeIcon icon={faLocationDot} className="h-3.5 w-3.5" />
+                {version.location}
+              </span>
+              {version.availability?.open && (
+                <>
+                  <span aria-hidden="true" className="max-sm:hidden">
+                    ·
+                  </span>
+                  <span className="whitespace-nowrap max-sm:basis-full">
+                    {version.availability.text}
+                  </span>
+                </>
+              )}
+            </motion.p>
+          )}
         </div>
 
         {/* Portrait column (Desktop right beside Your Name / Mobile above Your Name) */}

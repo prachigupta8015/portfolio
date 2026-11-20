@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Prachi Gupta — Software Engineer",
+  title: "Prachi Gupta — Frontend & React Native Engineer",
   description:
-    "Software Engineer portfolio of Prachi Gupta, building scalable web and mobile applications with React, React Native, Next.js, and TypeScript.",
+    "Portfolio of Prachi Gupta, a Frontend & React Native Engineer with 2+ years of experience shipping production web and mobile apps with React, React Native, and TypeScript.",
   icons: {
     icon: "/favicon.ico",
   },
