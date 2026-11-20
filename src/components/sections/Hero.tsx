@@ -106,8 +106,9 @@ export function Hero() {
             className="block leading-none font-extrabold tracking-[-0.04em] whitespace-nowrap select-none"
             style={{
               fontSize: "12.5vw",
-              color: "transparent",
-              WebkitTextStroke: "1px var(--line)",
+              // Per-theme strength lives in globals.css (--watermark-*).
+              color: "var(--watermark-fill)",
+              WebkitTextStroke: "1px var(--watermark-stroke)",
             }}
           >
             {version.watermark ?? version.label}
